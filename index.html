@@ -3,468 +3,309 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tig | Motion Design & Video Editing</title>
-  <meta name="description" content="Simple and Advanced Animations and Motion Design." />
+  <title>Tig — Video Editor &amp; Motion Designer</title>
+  <meta name="description" content="Short-form and long-form video editing with motion design. I'm Tig — I cut videos that hold attention." />
+
+  <link rel="canonical" href="https://tig-portfolio.pages.dev/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tig" />
+  <meta property="og:title" content="Tig — Video Editor & Motion Designer" />
+  <meta property="og:description" content="Short-form and long-form video editing with motion design. I'm Tig — I cut videos that hold attention." />
+  <meta property="og:url" content="https://tig-portfolio.pages.dev/" />
+  <meta property="og:image" content="https://tig-portfolio.pages.dev/assets/img/og.jpg" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="720" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/img/favicon-64.png" />
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="image" href="photo.jpg" fetchpriority="high" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Space+Mono&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&display=swap" rel="stylesheet" />
 
-  <style>
-    :root {
-      --bg: #070709;
-      --text: #f5f5f5;
-      --muted: #b4b4c2;
-      --line: rgba(255, 255, 255, 0.08);
-      --glass: rgba(255, 255, 255, 0.06);
-
-      /* Background glow colors */
-      --glow-1: #353a85; /* indigo (hair shading) */
-      --glow-2: #ff6200; /* orange (hair) */
-      --glow-3: #c8140a; /* red (headband) */
-
-      --accent: linear-gradient(135deg, #ff7a1a, #d4170c);
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: "Creato Display", "Outfit", "Helvetica Neue", Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
-    }
-
-    /* ---------- BLURRED BACKGROUND ---------- */
-    .bg {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      overflow: hidden;
-      background: var(--bg);
-    }
-
-    .bg span {
-      position: absolute;
-      width: 55vmax;
-      height: 55vmax;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.42;
-      animation: float 22s ease-in-out infinite alternate;
-    }
-
-    .bg span:nth-child(1) { background: var(--glow-1); top: -20%; left: -15%; }
-    .bg span:nth-child(2) { background: var(--glow-2); bottom: -25%; right: -15%; animation-delay: -7s; }
-    .bg span:nth-child(3) { background: var(--glow-3); top: 30%; left: 35%; width: 40vmax; height: 40vmax; opacity: 0.35; animation-delay: -14s; }
-
-    @keyframes float {
-      from { transform: translate(0, 0) scale(1); }
-      to   { transform: translate(6vmax, 4vmax) scale(1.12); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .bg span { animation: none; }
-      html { scroll-behavior: auto; }
-      .reveal { transition: none !important; }
-    }
-
-    /* ---------- NAVIGATION ---------- */
-    .nav {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 100;
-      display: flex;
-      gap: 4px;
-      padding: 6px;
-      background: rgba(20, 20, 32, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 999px;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-    }
-
-    .nav a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 400;
-      padding: 10px 20px;
-      border-radius: 999px;
-      transition: color 0.25s, background 0.25s;
-      white-space: nowrap;
-    }
-
-    .nav a:hover { color: var(--text); background: rgba(255, 255, 255, 0.08); }
-
-    .nav a.active {
-      color: #fff;
-      background: var(--accent);
-      box-shadow: 0 4px 18px rgba(255, 98, 0, 0.4);
-    }
-
-    /* ---------- SECTIONS (all centered) ---------- */
-    section {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 120px 24px 80px;
-      scroll-margin-top: 0;
-    }
-
-    .section-label {
-      font-size: 0.78rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 14px;
-    }
-
-    h2 {
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      margin-bottom: 48px;
-    }
-
-    /* ---------- HERO ---------- */
-   .photo-wrap {
-  position: relative;
-  width: 180px;
-  height: 180px;
-  margin-bottom: 32px;
-}
-
-.photo {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  background: var(--line);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35), 0 0 0 8px rgba(255, 255, 255, 0.04);
-}
-
-.badge {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 90px;
-  height: 90px;
-  object-fit: contain;
-  transform: rotate(12deg);
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
-}
-
-    h1 {
-      font-size: clamp(2.4rem, 7vw, 4rem);
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      margin-bottom: 14px;
-    }
-
-    .real-name {
-      font-size: 0.8rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 20px;
-    }
-
-    .intro {
-      font-size: clamp(1.05rem, 2.8vw, 1.35rem);
-      color: var(--text);
-      max-width: 520px;
-      line-height: 1.5;
-      margin-bottom: 14px;
-    }
-
-    .description {
-      font-size: clamp(0.95rem, 2.5vw, 1.2rem);
-      color: var(--muted);
-      max-width: 480px;
-      line-height: 1.6;
-      margin-bottom: 36px;
-    }
-
-    .btn {
-      display: inline-block;
-      text-decoration: none;
-      color: #fff;
-      font-weight: 600;
-      font-size: 0.95rem;
-      padding: 14px 32px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 10px 30px rgba(255, 98, 0, 0.35);
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-
-    .btn:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(255, 98, 0, 0.5); }
-
-    .btn.ghost {
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: none;
-      margin-left: 8px;
-    }
-
-    .btn.ghost:hover { background: rgba(255, 255, 255, 0.08); box-shadow: none; }
-
-    /* ---------- WORK ---------- */
-    .work {
-      width: 100%;
-      max-width: 960px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-
-    .video-slot {
-      aspect-ratio: 16 / 9;
-      background: var(--glass);
-      border: 1px solid var(--line);
-      backdrop-filter: blur(12px);
-      border-radius: 14px;
-      overflow: hidden;
-      transition: transform 0.3s, border-color 0.3s;
-    }
-
-    .video-slot:hover { transform: translateY(-4px); border-color: rgba(255, 255, 255, 0.25); }
-
-    .video-slot iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      display: block;
-    }
-
-    /* ---------- SERVICES ---------- */
-    .cards {
-      width: 100%;
-      max-width: 960px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .card {
-      background: var(--glass);
-      border: 1px solid var(--line);
-      backdrop-filter: blur(12px);
-      border-radius: 16px;
-      padding: 32px 24px;
-      transition: transform 0.3s, border-color 0.3s;
-    }
-
-    .card:hover { transform: translateY(-6px); border-color: rgba(255, 255, 255, 0.25); }
-
-    .card .icon {
-      width: 48px;
-      height: 48px;
-      margin: 0 auto 18px;
-      border-radius: 14px;
-      background: var(--accent);
-      display: grid;
-      place-items: center;
-      font-size: 1.3rem;
-    }
-
-    .card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; }
-    .card p { font-size: 0.92rem; color: var(--muted); line-height: 1.6; }
-
-    /* ---------- ABOUT / CONTACT ---------- */
-    .text-block {
-      max-width: 560px;
-      font-size: clamp(1rem, 2.5vw, 1.15rem);
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .contact-links {
-      margin-top: 32px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.8rem;
-      color: var(--muted);
-      padding: 0 24px 32px;
-    }
-
-    /* ---------- SCROLL REVEAL ---------- */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* ---------- RESPONSIVE ---------- */
-    @media (max-width: 800px) {
-      .cards { grid-template-columns: 1fr; max-width: 420px; }
-    }
-
-    @media (max-width: 700px) {
-      .work { grid-template-columns: 1fr; }
-      .photo-wrap { width: 140px; height: 140px; }
-.badge { width: 46px; height: 46px; }
-      .nav { top: auto; bottom: 18px; max-width: calc(100vw - 24px); }
-      .nav a { padding: 10px 13px; font-size: 0.8rem; }
-      section { padding: 80px 20px 110px; }
-      .btn.ghost { margin: 12px 0 0; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Tiago Pires",
+    "alternateName": "Tig",
+    "jobTitle": "Video Editor & Motion Designer",
+    "url": "https://tig-portfolio.pages.dev/",
+    "sameAs": ["https://www.instagram.com/tig_editor", "https://www.youtube.com/channel/UCOsuav56ihXr3ou1uQPDAng"]
+  }
+  </script>
 </head>
 
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="bg"><span></span><span></span><span></span></div>
+  <header class="site-head" data-header>
+    <a class="brand" href="#top">
+      <img src="assets/img/favicon-64.png" width="20" height="20" alt="" />
+      <span>Tig</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#work" data-navlink>Work<span class="slash" aria-hidden="true">/</span></a>
+      <a href="#about" data-navlink>About<span class="slash" aria-hidden="true">/</span></a>
+      <a href="#services" data-navlink>Services<span class="slash" aria-hidden="true">/</span></a>
+      <a href="#contact" data-navlink>Contact<span class="slash" aria-hidden="true">/</span></a>
+    </nav>
+    <button class="menu-btn mono" data-menu-btn aria-expanded="false" aria-controls="menuOverlay">Menu</button>
+  </header>
 
-  <!-- NAVIGATION -->
-  <nav class="nav" id="nav" aria-label="Main navigation">
-    <a href="#home" class="active">Home</a>
-    <a href="#about">About</a>
-    <a href="#work">Work</a>
-    <a href="#services">Services</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <div class="menu-overlay" id="menuOverlay" hidden>
+    <nav aria-label="Mobile">
+      <a href="#work" data-menuclose>Work<span aria-hidden="true"> ↘</span></a>
+      <a href="#about" data-menuclose>About<span aria-hidden="true"> ↘</span></a>
+      <a href="#services" data-menuclose>Services<span aria-hidden="true"> ↘</span></a>
+      <a href="#contact" data-menuclose>Contact<span aria-hidden="true"> ↘</span></a>
+    </nav>
+    <p class="mono menu-foot">tiagopires377@gmail.com — @tig_editor</p>
+  </div>
 
-  <!-- HOME -->
-  <section id="home">
-    <div class="photo-wrap">
-  <img class="photo" src="photo.jpg" alt="Tig" />
-  <img class="badge" src="icon.png" alt="" />
-</div>
-    <h1>Tig</h1>
-    <p class="real-name">Tiago Pires</p>
-    <p class="intro">Hey! I'm Tiago, a motion designer and video editor helping creators stand out.</p>
-    <p class="description">Simple and Advanced Animations, Motion Design and Viral Editing.</p>
-    <div>
-      <a class="btn" href="#work">View my work</a>
-      <a class="btn ghost" href="#contact">Get in touch</a>
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top" aria-labelledby="heroTitle">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="kicker mono" data-hero-step="1">
+            <img src="assets/img/favicon-64.png" width="16" height="16" alt="" />
+            Tiago Pires — Video Editor &amp; Motion Designer
+          </p>
+          <h1 id="heroTitle" data-hero-step="2">
+            Edits that hold<span class="accent-dot">.</span>
+          </h1>
+          <p class="hero-lede" data-hero-step="3">
+            Short-form and long-form video editing with motion design —
+            cuts built around rhythm, hooks and retention.
+          </p>
+          <div class="hero-cta" data-hero-step="4">
+            <a class="btn-solid" href="#work">Watch selected work</a>
+            <a class="link-underline" href="mailto:tiagopires377@gmail.com?subject=Project%20inquiry">Get in touch<span aria-hidden="true"> ↗</span></a>
+          </div>
+        </div>
+
+        <figure class="hero-photo" data-hero-step="3">
+          <div class="frame">
+            <img src="photo.jpg" width="800" height="800" alt="Portrait of Tiago Pires (Tig)" fetchpriority="high" />
+            <img class="hero-mascot" src="icon.png" width="1048" height="1025" alt="Tig's channel mascot" loading="lazy" />
+          </div>
+          <figcaption class="mono frame-cap">
+            <span>TIG / PORTRAIT</span>
+            <span>JPG 800×800</span>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="container hero-foot mono" aria-hidden="true">
+        <span>SHORTS</span>
+        <span>LONG-FORM</span>
+        <span>MOTION DESIGN</span>
+        <span>RETENTION</span>
+      </div>
+    </section>
+
+    <!-- ============ WORK ============ -->
+    <section class="work" id="work" aria-labelledby="workTitle">
+      <div class="container">
+        <header class="section-head" data-reveal data-reveal-stagger="1">
+          <div>
+            <p class="section-tick mono" aria-hidden="true">01 / WORK</p>
+            <h2 id="workTitle">Selected work</h2>
+          </div>
+          <p class="section-note mono">TWO PIECES / LONG-FORM + SHORTS<br />OPEN A FRAME TO PLAY</p>
+        </header>
+
+        <div class="work-list">
+
+          <article class="work-item work-item--a" aria-labelledby="longformTitle">
+            <div class="work-media" data-reveal>
+              <button class="frame play-frame" data-yt="ediIgtAnjoc"
+                      data-title="Detailed Edition with Motion Elements — Long Video Format"
+                      aria-label="Play video: Detailed Edition with Motion Elements, long video format">
+                <img src="assets/img/work/longform.jpg" width="1280" height="720" loading="lazy" decoding="async"
+                     alt="Before and after of a long video edit — a plain falling shot becomes a collage-style graphic treatment with layered motion" />
+                <span class="play-glyph mono" aria-hidden="true">Play</span>
+                <span class="tc mono" aria-hidden="true">TC 00:00:00:00</span>
+              </button>
+            </div>
+            <div class="work-meta" data-reveal data-reveal-stagger="2">
+              <p class="mono work-tag">01 — LONG-FORM · 16:9</p>
+              <h3 id="longformTitle">Detailed Edition with Motion Elements</h3>
+              <p class="work-note">
+                Same footage, two results. The after version carries layered motion,
+                graphic textures and cuts that keep the energy up across a long video.
+              </p>
+              <div class="work-links">
+                <button class="link-underline" data-yt="ediIgtAnjoc"
+                        data-title="Detailed Edition with Motion Elements — Long Video Format">Open player</button>
+                <a class="link-underline" href="https://youtu.be/ediIgtAnjoc" target="_blank" rel="noopener">YouTube<span aria-hidden="true"> ↗</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="work-item work-item--b" aria-labelledby="shortsTitle">
+            <div class="work-meta" data-reveal>
+              <p class="mono work-tag">02 — SHORTS · 9:16</p>
+              <h3 id="shortsTitle">Clean, Minimalist &amp; Modern Editing</h3>
+              <p class="work-note">
+                A raw podcast clip, reframed and rebuilt: bold type, tighter framing,
+                one idea per beat. Minimal on the surface — dense in the decisions.
+              </p>
+              <div class="work-links">
+                <button class="link-underline" data-yt="vVkeZ0U3DYc"
+                        data-title="Clean, Minimalist and Modern Editing — Shorts Format">Open player</button>
+                <a class="link-underline" href="https://youtu.be/vVkeZ0U3DYc" target="_blank" rel="noopener">YouTube<span aria-hidden="true"> ↗</span></a>
+              </div>
+            </div>
+            <div class="work-media" data-reveal data-reveal-stagger="2">
+              <button class="frame play-frame" data-yt="vVkeZ0U3DYc"
+                      data-title="Clean, Minimalist and Modern Editing — Shorts Format"
+                      aria-label="Play video: Clean, minimalist and modern editing, shorts format">
+                <img src="assets/img/work/shorts.jpg" width="1280" height="720" loading="lazy" decoding="async"
+                     alt="Before and after of a short video — a raw framed clip becomes a vertical reframe with bold kinetic typography" />
+                <span class="play-glyph mono" aria-hidden="true">Play</span>
+                <span class="tc mono" aria-hidden="true">TC 00:00:00:00</span>
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about" id="about" aria-labelledby="aboutTitle">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <div>
+            <p class="section-tick mono" aria-hidden="true">02 / ABOUT</p>
+            <h2 id="aboutTitle">Hi, I'm Tig.</h2>
+          </div>
+        </header>
+
+        <div class="about-grid">
+          <div class="about-copy" data-reveal data-reveal-stagger="2">
+            <p>
+              I'm Tiago — Tig everywhere else. I'm sixteen, and I've spent over two years
+              editing short-form and long-form videos, obsessing over the things that stop
+              a viewer from scrolling away: rhythm, hooks and the small motion touches
+              that make a cut feel alive.
+            </p>
+            <p>
+              Every project is a story problem, not a pile of effects.
+              If it doesn't hold attention, it gets cut.
+            </p>
+          </div>
+
+          <dl class="about-facts mono" data-reveal data-reveal-stagger="3">
+            <div><dt>EXPERIENCE</dt><dd>2+ years</dd></div>
+            <div><dt>FORMATS</dt><dd>Shorts + long-form</dd></div>
+            <div><dt>FOCUS</dt><dd>Retention, motion, style</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section class="services" id="services" aria-labelledby="servicesTitle">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <div>
+            <p class="section-tick mono" aria-hidden="true">03 / SERVICES</p>
+            <h2 id="servicesTitle">What I do</h2>
+          </div>
+          <p class="section-note mono">FROM A SINGLE CUT TO<br />FULL MOTION DESIGN</p>
+        </header>
+
+        <ul class="service-list">
+          <li data-reveal data-reveal-stagger="1">
+            <p class="mono service-index" aria-hidden="true">01</p>
+            <div>
+              <h3>Short-form editing</h3>
+              <p>
+                Fast, hook-first cuts for Shorts — reframed, typed and paced
+                so every second earns the next one.
+              </p>
+            </div>
+          </li>
+          <li data-reveal data-reveal-stagger="2">
+            <p class="mono service-index" aria-hidden="true">02</p>
+            <div>
+              <h3>Long-form editing</h3>
+              <p>
+                Full-length videos edited with real detail — beats, effects and
+                motion elements that carry energy across minutes.
+              </p>
+            </div>
+          </li>
+          <li data-reveal data-reveal-stagger="3">
+            <p class="mono service-index" aria-hidden="true">03</p>
+            <div>
+              <h3>Motion design</h3>
+              <p>
+                From simple animations to advanced motion graphics —
+                titles, overlays and transitions that feel deliberate, not decorated.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="contact" id="contact" aria-labelledby="contactTitle">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <div>
+            <p class="section-tick mono" aria-hidden="true">04 / CONTACT</p>
+            <h2 id="contactTitle">Have something to cut?</h2>
+          </div>
+        </header>
+
+        <div class="contact-grid">
+          <p class="contact-mail" data-reveal data-reveal-stagger="1">
+            <a href="mailto:tiagopires377@gmail.com?subject=Project%20inquiry">tiagopires377<span class="at">@</span>gmail.com</a>
+            <button class="copy-btn mono" data-copy="tiagopires377@gmail.com" aria-live="polite">
+              <span data-copy-label>COPY</span>
+            </button>
+          </p>
+
+          <ul class="contact-links mono" data-reveal data-reveal-stagger="2">
+            <li><a href="https://instagram.com/tig_editor" target="_blank" rel="noopener">INSTAGRAM — @tig_editor<span aria-hidden="true"> ↗</span></a></li>
+            <li><a href="https://www.youtube.com/channel/UCOsuav56ihXr3ou1uQPDAng" target="_blank" rel="noopener">YOUTUBE — @tht_tig<span aria-hidden="true"> ↗</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot mono">
+    <div class="container site-foot-grid">
+      <span class="foot-brand"><img src="assets/img/favicon-64.png" width="16" height="16" alt="" /> Tig — Tiago Pires</span>
+      <span>PORTFOLIO — <span data-year>2026</span></span>
+      <span><a href="mailto:tiagopires377@gmail.com">EMAIL</a> / <a href="https://instagram.com/tig_editor" target="_blank" rel="noopener">IG</a> / <a href="https://www.youtube.com/channel/UCOsuav56ihXr3ou1uQPDAng" target="_blank" rel="noopener">YT</a></span>
     </div>
-  </section>
+  </footer>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <p class="section-label reveal">About</p>
-    <h2 class="reveal">ME</h2>
-    <p class="text-block reveal">
-      I'm a 16-years-old video editor with over 2 years of experience in content editing.
-      I specializade in short-form and long-form videos, focused on performace, creativity-style, retention and audience engagement.
-    </p>
-  </section>
-
-  <!-- WORK -->
-  <section id="work">
-    <p class="section-label reveal">Portfolio</p>
-    <h2 class="reveal">Selected Work</h2>
-
-    <div class="work reveal">
-      <div class="video-slot">
-        <iframe
-          src="https://www.youtube.com/embed/vVkeZ0U3DYc"
-          title="Portfolio video 1"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
-      </div>
-
-      <div class="video-slot">
-        <iframe
-          src="https://www.youtube.com/embed/ediIgtAnjoc"
-          title="Portfolio video 2"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
-      </div>
+  <!-- ============ PLAYER MODAL ============ -->
+  <dialog class="player" id="player" aria-labelledby="playerTitle">
+    <div class="player-head">
+      <p class="mono" id="playerTitle">—</p>
+      <button class="player-close mono" data-player-close aria-label="Close player">CLOSE ✕</button>
     </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section id="services">
-    <p class="section-label reveal">What I do</p>
-    <h2 class="reveal">Services</h2>
-
-    <div class="cards">
-      <div class="card reveal">
-        <div class="icon">✦</div>
-        <h3>Simple Animations</h3>
-        <p>Clean, effective animations that add polish and clarity to your content.</p>
-      </div>
-      <div class="card reveal">
-        <div class="icon">◈</div>
-        <h3>Advanced Motion Design</h3>
-        <p>Complex, custom motion graphics built to make your brand stand out.</p>
-      </div>
-      <div class="card reveal">
-        <div class="icon">▶</div>
-        <h3>Viral Editing</h3>
-        <p>Fast-paced, attention-grabbing edits designed to hook viewers and keep them watching.</p>
-      </div>
+    <div class="player-stage" id="playerStage"></div>
+    <div class="player-foot mono">
+      <span id="playerMeta">YOUTUBE PLAYER</span>
+      <a id="playerLink" href="#" target="_blank" rel="noopener">WATCH ON YOUTUBE ↗</a>
     </div>
-  </section>
+  </dialog>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <p class="section-label reveal">Contact</p>
-    <h2 class="reveal">Let's work together</h2>
-    <p class="text-block reveal">Have a project in mind? Send me a message to we make something great.</p>
-    <div class="contact-links reveal">
-      <!-- Replace with your real email and social links -->
-      <a class="btn" href="mailto:tiagopires377@gmail.com">tiagopires377@gmail.com</a>
-      <a class="btn ghost" href="https://instagram.com/tig_editor" target="_blank" rel="noopener">Instagram @tig_editor</a>
-    </div>
-  </section>
-
-  <footer>© <span id="year"></span> Tig. All rights reserved.</footer>
-
-  <script>
-    // Footer year
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Highlight the nav link of the section currently in view
-    const links = document.querySelectorAll(".nav a");
-    const sections = document.querySelectorAll("section");
-
-    const navObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          links.forEach((l) => l.classList.toggle("active", l.getAttribute("href") === "#" + entry.target.id));
-        }
-      });
-    }, { rootMargin: "-45% 0px -45% 0px" });
-
-    sections.forEach((s) => navObserver.observe(s));
-
-    // Fade-in on scroll
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
-  </script>
-
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
