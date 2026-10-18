@@ -34,15 +34,15 @@ Open http://localhost:8000
    account (`tiagopiressantos-lgtm.github.io/Portfolio` stays available
    by pointing the old repo to a redirect or re-uploading).
 
-## Deploy — Cloudflare Pages
+## Deploy — Cloudflare
+
+Config already committed (`wrangler.jsonc`, name `tigportfolio`):
 
 ```
-npx wrangler pages deploy . --project-name tig-portfolio --branch main
+npx wrangler deploy
 ```
 
-Live at: https://tig-portfolio.pages.dev
-(Main deploys may use a hash subdomain if the project was first created
-via direct upload; the canonical URL is set in `index.html`.)
+Live at: https://tigportfolio.yuricruzcorreia2024.workers.dev
 
 ## Notes
 
