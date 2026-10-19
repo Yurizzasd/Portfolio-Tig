@@ -13,7 +13,18 @@ assets/img/           icons, OG image, work thumbnails
 photo.jpg / icon.png  original portrait + channel mascot
 ```
 
-## Run locally
+## Single-file version
+
+A fully compressed, one-file build of the site lives at
+`portfolio-tig-1-arquivo.html` (CSS/JS inlined, images base64-embedded —
+works offline and can be sent as an attachment). Regenerate it after any
+change with:
+
+```
+node tools/build-single.js
+```
+
+Run locally
 
 Any static server works from the project root:
 
